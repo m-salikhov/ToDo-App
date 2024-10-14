@@ -1,0 +1,23 @@
+:root {
+  font-family: Quicksand, system-ui, arial, helvetica;
+  min-height: 100vh;
+  word-break: break-all;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, rgb(239, 241, 241), rgb(179, 185, 185));
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
