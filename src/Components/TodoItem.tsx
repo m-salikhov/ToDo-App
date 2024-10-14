@@ -1,6 +1,6 @@
 import { Todo } from './TodoList';
-import green_ans from '../assets/green_mark.svg';
-import red_ans from '../assets/red_cross.svg';
+import green_mark from '../assets/green_mark.svg';
+import red_cross from '../assets/red_cross.svg';
 
 interface Props {
   todo: Todo;
@@ -26,15 +26,17 @@ export default function TodoItem({ todo, setTodos }: Props) {
   return (
     <div className='todo-item'>
       <div className='todo-item-icon'>
-        <div className='todo-item-circle' onClick={onClick}>
-          {todo.completed && <img src={green_ans} alt='todo completed icon' />}
+        <div className='todo-item-circle' onClick={onClick} data-testid='change-status-icon'>
+          {todo.completed && <img src={green_mark} alt='todo completed icon' />}
         </div>
       </div>
+
       <p onClick={onClick} className={todo.completed ? 'completed' : undefined}>
         {todo.text}
       </p>
+
       <div className='todo-item-remove'>
-        <img src={red_ans} alt='remove todo icon' onClick={onDelete} />
+        <img src={red_cross} alt='remove todo icon' onClick={onDelete} data-testid='delete-icon' />
       </div>
     </div>
   );

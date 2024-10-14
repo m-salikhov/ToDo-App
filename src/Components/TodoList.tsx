@@ -17,8 +17,10 @@ export default function TodoList() {
   return (
     <>
       <h1>todos</h1>
+
       <div className='todo-wrapper'>
         <TodoForm setTodos={setTodos} />
+
         {todos.length > 0 ? (
           todos.map((todo) => {
             if (todo.show) {
@@ -30,6 +32,7 @@ export default function TodoList() {
         ) : (
           <h4>Todo list is empty</h4>
         )}
+
         <TodoControl
           todos={todos}
           setTodos={setTodos}
