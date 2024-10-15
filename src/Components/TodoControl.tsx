@@ -3,10 +3,9 @@ import { Todo } from './TodoList';
 
 interface Props {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  todos: Todo[];
   itemsLeft: number;
 }
-export default function TodoControl({ setTodos, itemsLeft, todos }: Props) {
+export default function TodoControl({ setTodos, itemsLeft }: Props) {
   const [filterSelected, setFilterSelected] = useState<'all' | 'active' | 'completed'>('all');
 
   const filter = (value: string) => {
@@ -43,21 +42,25 @@ export default function TodoControl({ setTodos, itemsLeft, todos }: Props) {
   };
 
   const onFilter = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if (e.target instanceof HTMLParagraphElement) {
+    if (e.target instanceof HTMLParagraphElement && e.target.id !== filterSelected) {
       filter(e.target.id);
     }
   };
 
   const clearCompleted = () => {
+    if (!itemsLeft) return;
+
     setTodos((prev) => prev.filter((todo) => !todo.completed));
   };
 
   useEffect(() => {
+    if (filterSelected === 'all') return;
+
     filter(filterSelected);
-  }, [todos]);
+  }, [itemsLeft]);
 
   return (
-    <div className='todo-control'>
+    <div className='todo-control' data-testid='todo-control'>
       <p>{`${itemsLeft} items left`}</p>
 
       <div className='todo-control-filter' onClick={onFilter}>

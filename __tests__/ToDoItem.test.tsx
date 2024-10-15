@@ -36,25 +36,58 @@ describe('TodoItem render', () => {
 });
 
 describe('TodoItem click', () => {
-  test('click on todo item', async () => {
-    const fn = vi.fn();
-    render(<TodoItem todo={todo} setTodos={fn} />);
+  test('click on todo item paragraph', async () => {
+    const todoItem = { ...todo };
+
+    const fn = vi.fn().mockImplementation(() => {
+      todoItem.completed = !todoItem.completed;
+    });
+
+    const { rerender } = render(<TodoItem todo={todoItem} setTodos={fn} />);
     const paragraphElement = screen.getByText(/test/i);
+    expect(paragraphElement).not.toHaveClass('completed');
 
     await userEvent.click(paragraphElement);
 
+    rerender(<TodoItem todo={todoItem} setTodos={fn} />);
+    const paragraphElementCompleted = screen.getByText(/test/i);
+    expect(paragraphElementCompleted).toHaveClass('completed');
     expect(fn).toHaveBeenCalledTimes(1);
+
+    await userEvent.click(paragraphElement);
+
+    rerender(<TodoItem todo={todoItem} setTodos={fn} />);
+    const paragraphElementUnCompleted = screen.getByText(/test/i);
+    expect(paragraphElementUnCompleted).not.toHaveClass('completed');
+    expect(fn).toHaveBeenCalledTimes(2);
   });
 
   test('click on todo status icon', async () => {
-    const fn = vi.fn();
-    render(<TodoItem todo={todo} setTodos={fn} />);
+    const todoItem = { ...todo };
+
+    const fn = vi.fn().mockImplementation(() => {
+      todoItem.completed = !todoItem.completed;
+    });
+
+    const { rerender } = render(<TodoItem todo={todoItem} setTodos={fn} />);
 
     const statusIconElement = screen.getByTestId('change-status-icon');
+    const greenArrowIcon = screen.queryByRole('img', { name: 'todo completed icon' });
+    expect(greenArrowIcon).not.toBeInTheDocument();
 
     await userEvent.click(statusIconElement);
 
+    rerender(<TodoItem todo={todoItem} setTodos={fn} />);
+    const greenArrowIconCompleted = screen.getByRole('img', { name: 'todo completed icon' });
+    expect(greenArrowIconCompleted).toBeInTheDocument();
     expect(fn).toHaveBeenCalledTimes(1);
+
+    await userEvent.click(statusIconElement);
+
+    rerender(<TodoItem todo={todoItem} setTodos={fn} />);
+    const greenArrowIconUnCompleted = screen.queryByRole('img', { name: 'todo completed icon' });
+    expect(greenArrowIconUnCompleted).not.toBeInTheDocument();
+    expect(fn).toHaveBeenCalledTimes(2);
   });
 
   test('click on delete icon', async () => {

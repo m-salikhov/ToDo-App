@@ -33,11 +33,7 @@ export default function TodoList() {
           <h4>Todo list is empty</h4>
         )}
 
-        <TodoControl
-          todos={todos}
-          setTodos={setTodos}
-          itemsLeft={todos.reduce((acc, todo) => acc + (todo.completed ? 0 : 1), 0)}
-        />
+        <TodoControl setTodos={setTodos} itemsLeft={todos.reduce((acc, todo) => acc + (todo.completed ? 0 : 1), 0)} />
       </div>
     </>
   );
