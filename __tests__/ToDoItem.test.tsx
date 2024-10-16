@@ -11,19 +11,19 @@ const todo = {
 };
 
 describe('TodoItem render', () => {
-  test('render todo item', () => {
+  test('uncompleted todo item', () => {
     render(<TodoItem todo={todo} setTodos={() => {}} />);
 
     const paragraphElement = screen.getByText(/test/i);
     const greenArrowIcon = screen.queryByRole('img', { name: 'todo completed icon' });
-    const redCrossIcon = screen.queryByRole('img', { name: 'remove todo icon' });
+    const redCrossIcon = screen.getByRole('img', { name: 'remove todo icon' });
 
     expect(greenArrowIcon).toBeNull();
     expect(paragraphElement).toBeInTheDocument();
     expect(redCrossIcon).toBeInTheDocument();
   });
 
-  test('render completed todo item', () => {
+  test('completed todo item', () => {
     render(<TodoItem todo={{ ...todo, completed: true }} setTodos={() => {}} />);
 
     const paragraphElement = screen.getByText(/test/i);
@@ -35,7 +35,7 @@ describe('TodoItem render', () => {
   });
 });
 
-describe('TodoItem click', () => {
+describe('TodoItem user interactions', () => {
   test('click on todo item paragraph', async () => {
     const todoItem = { ...todo };
 

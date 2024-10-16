@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Todo } from './TodoList';
+import { useLayoutEffect, useState } from 'react';
+import { Todo } from './TodoApp';
 
 interface Props {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
@@ -38,6 +38,10 @@ export default function TodoControl({ setTodos, itemsLeft }: Props) {
         );
         setFilterSelected('completed');
         break;
+
+      default:
+        console.error('unknown filter');
+        break;
     }
   };
 
@@ -48,12 +52,10 @@ export default function TodoControl({ setTodos, itemsLeft }: Props) {
   };
 
   const clearCompleted = () => {
-    if (!itemsLeft) return;
-
     setTodos((prev) => prev.filter((todo) => !todo.completed));
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (filterSelected === 'all') return;
 
     filter(filterSelected);
@@ -64,13 +66,13 @@ export default function TodoControl({ setTodos, itemsLeft }: Props) {
       <p>{`${itemsLeft} items left`}</p>
 
       <div className='todo-control-filter' onClick={onFilter}>
-        <p id='all' className={filterSelected === 'all' ? 'active' : undefined}>
+        <p id='all' className={filterSelected === 'all' ? 'selected' : undefined}>
           All
         </p>
-        <p id='active' className={filterSelected === 'active' ? 'active' : undefined}>
+        <p id='active' className={filterSelected === 'active' ? 'selected' : undefined}>
           Active
         </p>
-        <p id='completed' className={filterSelected === 'completed' ? 'active' : undefined}>
+        <p id='completed' className={filterSelected === 'completed' ? 'selected' : undefined}>
           Completed
         </p>
       </div>

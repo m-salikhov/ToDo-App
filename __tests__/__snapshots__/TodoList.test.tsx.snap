@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TodoList render > render todo list 1`] = `
+<ul>
+  <li>
+    <div
+      class="todo-item-icon"
+    >
+      <div
+        class="todo-item-circle"
+        data-testid="change-status-icon"
+      />
+    </div>
+    <p>
+      todo 1
+    </p>
+    <div
+      class="todo-item-remove"
+    >
+      <img
+        alt="remove todo icon"
+        data-testid="delete-icon"
+        src="/src/assets/red_cross.svg"
+      />
+    </div>
+  </li>
+  <li>
+    <div
+      class="todo-item-icon"
+    >
+      <div
+        class="todo-item-circle"
+        data-testid="change-status-icon"
+      >
+        <img
+          alt="todo completed icon"
+          src="/src/assets/green_mark.svg"
+        />
+      </div>
+    </div>
+    <p
+      class="completed"
+    >
+      todo 2
+    </p>
+    <div
+      class="todo-item-remove"
+    >
+      <img
+        alt="remove todo icon"
+        data-testid="delete-icon"
+        src="/src/assets/red_cross.svg"
+      />
+    </div>
+  </li>
+</ul>
+`;

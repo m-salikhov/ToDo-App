@@ -1,40 +1,26 @@
-import './todo-list.css';
-import { useState } from 'react';
-import TodoForm from './TodoForm';
+import { Todo } from './TodoApp';
 import TodoItem from './TodoItem';
-import TodoControl from './TodoControl';
 
-export interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-  show: boolean;
+interface Props {
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
-
-export default function TodoList() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
+export default function TodoList({ todos, setTodos }: Props) {
   return (
     <>
-      <h1>todos</h1>
-
-      <div className='todo-wrapper'>
-        <TodoForm setTodos={setTodos} />
-
-        {todos.length > 0 ? (
-          todos.map((todo) => {
+      {todos.length > 0 ? (
+        <ul>
+          {todos.map((todo) => {
             if (todo.show) {
               return <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />;
             } else {
               return null;
             }
-          })
-        ) : (
-          <h4>Todo list is empty</h4>
-        )}
-
-        <TodoControl setTodos={setTodos} itemsLeft={todos.reduce((acc, todo) => acc + (todo.completed ? 0 : 1), 0)} />
-      </div>
+          })}
+        </ul>
+      ) : (
+        <h4>Todo list is empty</h4>
+      )}
     </>
   );
 }

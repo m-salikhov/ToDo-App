@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Todo } from './TodoList';
+import { Todo } from './TodoApp';
 
 interface Props {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
@@ -30,7 +30,14 @@ export default function TodoForm({ setTodos }: Props) {
         addTodo();
       }}
     >
-      <input type='text' placeholder='What needs to be done?' value={text} onChange={(e) => setText(e.target.value)} />
+      <input
+        type='text'
+        placeholder='What needs to be done?'
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        autoFocus
+      />
+
       <button type='button' onClick={addTodo}>
         Add
       </button>

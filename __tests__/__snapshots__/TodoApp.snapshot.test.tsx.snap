@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`render todo app 1`] = `
+<div>
+  <h1>
+    todos
+  </h1>
+  <div
+    class="todo-wrapper"
+  >
+    <form>
+      <input
+        placeholder="What needs to be done?"
+        type="text"
+        value=""
+      />
+      <button
+        type="button"
+      >
+        Add
+      </button>
+    </form>
+    <h4>
+      Todo list is empty
+    </h4>
+    <div
+      class="todo-control"
+      data-testid="todo-control"
+    >
+      <p>
+        0 items left
+      </p>
+      <div
+        class="todo-control-filter"
+      >
+        <p
+          class="selected"
+          id="all"
+        >
+          All
+        </p>
+        <p
+          id="active"
+        >
+          Active
+        </p>
+        <p
+          id="completed"
+        >
+          Completed
+        </p>
+      </div>
+      <p>
+        Clear completed
+      </p>
+    </div>
+  </div>
+</div>
+`;

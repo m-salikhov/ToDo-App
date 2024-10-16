@@ -7,9 +7,11 @@ test('render todo form', () => {
   render(<TodoForm setTodos={() => {}} />);
 
   const inputElement = screen.getByPlaceholderText('What needs to be done?');
-  const buttonElement = screen.getByRole('button', { name: 'Add' });
-  expect(inputElement).toBeInTheDocument();
-  expect(buttonElement).toBeInTheDocument();
+  const buttonElement = screen.getByRole('button');
+
+  expect(inputElement).toHaveTextContent('');
+  expect(inputElement).toHaveFocus();
+  expect(buttonElement).toHaveTextContent('Add');
 });
 
 describe('user interactions with form', () => {
@@ -38,7 +40,6 @@ describe('user interactions with form', () => {
     const inputElement = screen.getByPlaceholderText('What needs to be done?');
     const buttonElement = screen.getByRole('button', { name: 'Add' });
 
-    //with empty input
     await userEvent.keyboard('{Enter}');
     await userEvent.click(buttonElement);
     expect(fn).toHaveBeenCalledTimes(0);
