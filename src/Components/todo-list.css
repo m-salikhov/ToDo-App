@@ -133,3 +133,9 @@ h1 {
     }
   }
 }
+
+@media (max-width: 500px) {
+  .todo-wrapper {
+    width: 100%;
+  }
+}
